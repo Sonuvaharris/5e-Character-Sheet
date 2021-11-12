@@ -1,3 +1,10 @@
+#Sonuvaharris's Changes.
+Goals of this fork: 
+-use a local python server to handle filesystem read/write for proper saving
+-handle multiple sheets in single instance
+-remove all internet-dependent parts
+-other changes that simply come down to preference
+
 # Dungeons & Dragons 5th Edition Character Sheet
 ### A New and Modern Character Sheet for 5th edition Dungeons & Dragons.
 #### About:
