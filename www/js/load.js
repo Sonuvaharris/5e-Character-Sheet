@@ -63,77 +63,77 @@ $(document).ready(function(argument) {
     $('#page-1 #saves-skills #saves input[name="cha-save"]').val(loadJson.page1.saves_skills.saves.cha_save.val);
     $('#page-1 #saves-skills #saves #cha-save input[name="prof"]').prop("checked", loadJson.page1.saves_skills.saves.cha_save.prof);
 
-    $('#page-1 #saves-skills #skills input[name="acrobatics-skill"]').val(loadJson.page1.saves_skills.skills.acrobatics.val);
-    $('#page-1 #saves-skills #skills #acrobatics-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.acrobatics.prof);
-    $('#page-1 #saves-skills #skills #acrobatics-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.acrobatics.expr);
+    $('#page-1 #saves-skills .skills input[name="acrobatics-skill"]').val(loadJson.page1.saves_skills.skills.acrobatics.val);
+    $('#page-1 #saves-skills .skills #acrobatics-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.acrobatics.prof);
+    $('#page-1 #saves-skills .skills #acrobatics-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.acrobatics.expr);
 
-    $('#page-1 #saves-skills #skills input[name="animal-handling-skill"]').val(loadJson.page1.saves_skills.skills.animal_handling.val);
-    $('#page-1 #saves-skills #skills #animal-handling-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.animal_handling.prof);
-    $('#page-1 #saves-skills #skills #animal-handling-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.animal_handling.expr)
+    $('#page-1 #saves-skills .skills input[name="animal-handling-skill"]').val(loadJson.page1.saves_skills.skills.animal_handling.val);
+    $('#page-1 #saves-skills .skills #animal-handling-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.animal_handling.prof);
+    $('#page-1 #saves-skills .skills #animal-handling-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.animal_handling.expr)
 
-    $('#page-1 #saves-skills #skills input[name="arcana-skill"]').val(loadJson.page1.saves_skills.skills.arcana.val);
-    $('#page-1 #saves-skills #skills #arcana-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.arcana.prof);
-    $('#page-1 #saves-skills #skills #arcana-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.arcana.expr);
+    $('#page-1 #saves-skills .skills input[name="arcana-skill"]').val(loadJson.page1.saves_skills.skills.arcana.val);
+    $('#page-1 #saves-skills .skills #arcana-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.arcana.prof);
+    $('#page-1 #saves-skills .skills #arcana-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.arcana.expr);
 
-    $('#page-1 #saves-skills #skills input[name="athletics-skill"]').val(loadJson.page1.saves_skills.skills.athletics.val);
-    $('#page-1 #saves-skills #skills #athletics-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.athletics.prof);
-    $('#page-1 #saves-skills #skills #athletics-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.athletics.expr);
+    $('#page-1 #saves-skills .skills input[name="athletics-skill"]').val(loadJson.page1.saves_skills.skills.athletics.val);
+    $('#page-1 #saves-skills .skills #athletics-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.athletics.prof);
+    $('#page-1 #saves-skills .skills #athletics-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.athletics.expr);
 
-    $('#page-1 #saves-skills #skills input[name="deception-skill"]').val(loadJson.page1.saves_skills.skills.deception.val);
-    $('#page-1 #saves-skills #skills #deception-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.deception.prof);
-    $('#page-1 #saves-skills #skills #deception-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.deception.expr);
+    $('#page-1 #saves-skills .skills input[name="deception-skill"]').val(loadJson.page1.saves_skills.skills.deception.val);
+    $('#page-1 #saves-skills .skills #deception-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.deception.prof);
+    $('#page-1 #saves-skills .skills #deception-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.deception.expr);
 
-    $('#page-1 #saves-skills #skills input[name="history-skill"]').val(loadJson.page1.saves_skills.skills.history.val);
-    $('#page-1 #saves-skills #skills #history-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.history.prof);
-    $('#page-1 #saves-skills #skills #history-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.history.expr);
+    $('#page-1 #saves-skills .skills input[name="history-skill"]').val(loadJson.page1.saves_skills.skills.history.val);
+    $('#page-1 #saves-skills .skills #history-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.history.prof);
+    $('#page-1 #saves-skills .skills #history-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.history.expr);
 
-    $('#page-1 #saves-skills #skills input[name="insight-skill"]').val(loadJson.page1.saves_skills.skills.insight.val);
-    $('#page-1 #saves-skills #skills #insight-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.insight.prof);
-    $('#page-1 #saves-skills #skills #insight-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.insight.expr);
+    $('#page-1 #saves-skills .skills input[name="insight-skill"]').val(loadJson.page1.saves_skills.skills.insight.val);
+    $('#page-1 #saves-skills .skills #insight-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.insight.prof);
+    $('#page-1 #saves-skills .skills #insight-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.insight.expr);
 
-    $('#page-1 #saves-skills #skills input[name="intimidation-skill"]').val(loadJson.page1.saves_skills.skills.intimidation.val);
-    $('#page-1 #saves-skills #skills #intimidation-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.intimidation.prof);
-    $('#page-1 #saves-skills #skills #intimidation-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.intimidation.expr);
+    $('#page-1 #saves-skills .skills input[name="intimidation-skill"]').val(loadJson.page1.saves_skills.skills.intimidation.val);
+    $('#page-1 #saves-skills .skills #intimidation-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.intimidation.prof);
+    $('#page-1 #saves-skills .skills #intimidation-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.intimidation.expr);
 
-    $('#page-1 #saves-skills #skills input[name="investigation-skill"]').val(loadJson.page1.saves_skills.skills.investigation.val);
-    $('#page-1 #saves-skills #skills #investigation-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.investigation.prof);
-    $('#page-1 #saves-skills #skills #investigation-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.investigation.expr);
+    $('#page-1 #saves-skills .skills input[name="investigation-skill"]').val(loadJson.page1.saves_skills.skills.investigation.val);
+    $('#page-1 #saves-skills .skills #investigation-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.investigation.prof);
+    $('#page-1 #saves-skills .skills #investigation-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.investigation.expr);
 
-    $('#page-1 #saves-skills #skills input[name="medicine-skill"]').val(loadJson.page1.saves_skills.skills.medicine.val);
-    $('#page-1 #saves-skills #skills #medicine-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.medicine.prof);
-    $('#page-1 #saves-skills #skills #medicine-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.medicine.expr);
+    $('#page-1 #saves-skills .skills input[name="medicine-skill"]').val(loadJson.page1.saves_skills.skills.medicine.val);
+    $('#page-1 #saves-skills .skills #medicine-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.medicine.prof);
+    $('#page-1 #saves-skills .skills #medicine-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.medicine.expr);
 
-    $('#page-1 #saves-skills #skills input[name="nature-skill"]').val(loadJson.page1.saves_skills.skills.nature.val);
-    $('#page-1 #saves-skills #skills #nature-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.nature.prof);
-    $('#page-1 #saves-skills #skills #nature-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.nature.expr);
+    $('#page-1 #saves-skills .skills input[name="nature-skill"]').val(loadJson.page1.saves_skills.skills.nature.val);
+    $('#page-1 #saves-skills .skills #nature-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.nature.prof);
+    $('#page-1 #saves-skills .skills #nature-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.nature.expr);
 
-    $('#page-1 #saves-skills #skills input[name="perception-skill"]').val(loadJson.page1.saves_skills.skills.perception.val);
-    $('#page-1 #saves-skills #skills #perception-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.perception.prof);
-    $('#page-1 #saves-skills #skills #perception-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.perception.expr);
+    $('#page-1 #saves-skills .skills input[name="perception-skill"]').val(loadJson.page1.saves_skills.skills.perception.val);
+    $('#page-1 #saves-skills .skills #perception-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.perception.prof);
+    $('#page-1 #saves-skills .skills #perception-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.perception.expr);
 
-    $('#page-1 #saves-skills #skills input[name="performance-skill"]').val(loadJson.page1.saves_skills.skills.performance.val);
-    $('#page-1 #saves-skills #skills #performance-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.performance.prof);
-    $('#page-1 #saves-skills #skills #performance-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.performance.expr);
+    $('#page-1 #saves-skills .skills input[name="performance-skill"]').val(loadJson.page1.saves_skills.skills.performance.val);
+    $('#page-1 #saves-skills .skills #performance-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.performance.prof);
+    $('#page-1 #saves-skills .skills #performance-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.performance.expr);
 
-    $('#page-1 #saves-skills #skills input[name="persuasion-skill"]').val(loadJson.page1.saves_skills.skills.persuasion.val);
-    $('#page-1 #saves-skills #skills #persuasion-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.persuasion.prof);
-    $('#page-1 #saves-skills #skills #persuasion-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.persuasion.expr);
+    $('#page-1 #saves-skills .skills input[name="persuasion-skill"]').val(loadJson.page1.saves_skills.skills.persuasion.val);
+    $('#page-1 #saves-skills .skills #persuasion-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.persuasion.prof);
+    $('#page-1 #saves-skills .skills #persuasion-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.persuasion.expr);
 
-    $('#page-1 #saves-skills #skills input[name="religion-skill"]').val(loadJson.page1.saves_skills.skills.religion.val);
-    $('#page-1 #saves-skills #skills #religion-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.religion.prof);
-    $('#page-1 #saves-skills #skills #religion-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.religion.expr);
+    $('#page-1 #saves-skills .skills input[name="religion-skill"]').val(loadJson.page1.saves_skills.skills.religion.val);
+    $('#page-1 #saves-skills .skills #religion-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.religion.prof);
+    $('#page-1 #saves-skills .skills #religion-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.religion.expr);
 
-    $('#page-1 #saves-skills #skills input[name="sleight-hand-skill"]').val(loadJson.page1.saves_skills.skills.sleight_hand.val);
-    $('#page-1 #saves-skills #skills #sleight-hand-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.sleight_hand.prof);
-    $('#page-1 #saves-skills #skills #sleight-hand-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.sleight_hand.expr);
+    $('#page-1 #saves-skills .skills input[name="sleight-hand-skill"]').val(loadJson.page1.saves_skills.skills.sleight_hand.val);
+    $('#page-1 #saves-skills .skills #sleight-hand-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.sleight_hand.prof);
+    $('#page-1 #saves-skills .skills #sleight-hand-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.sleight_hand.expr);
 
-    $('#page-1 #saves-skills #skills input[name="stealth-skill"]').val(loadJson.page1.saves_skills.skills.stealth.val);
-    $('#page-1 #saves-skills #skills #stealth-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.stealth.prof);
-    $('#page-1 #saves-skills #skills #stealth-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.stealth.expr);
+    $('#page-1 #saves-skills .skills input[name="stealth-skill"]').val(loadJson.page1.saves_skills.skills.stealth.val);
+    $('#page-1 #saves-skills .skills #stealth-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.stealth.prof);
+    $('#page-1 #saves-skills .skills #stealth-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.stealth.expr);
 
-    $('#page-1 #saves-skills #skills input[name="survival-skill"]').val(loadJson.page1.saves_skills.skills.survival.val);
-    $('#page-1 #saves-skills #skills #survival-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.survival.prof);
-    $('#page-1 #saves-skills #skills #survival-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.survival.expr);
+    $('#page-1 #saves-skills .skills input[name="survival-skill"]').val(loadJson.page1.saves_skills.skills.survival.val);
+    $('#page-1 #saves-skills .skills #survival-skill input[name="prof"]').prop("checked", loadJson.page1.saves_skills.skills.survival.prof);
+    $('#page-1 #saves-skills .skills #survival-skill input[name="expr"]').prop("checked", loadJson.page1.saves_skills.skills.survival.expr);
 
     //Load Status
     $('#page-1 #status #conditions textarea[name="conditions"]').val(loadJson.page1.status.conditions);

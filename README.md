@@ -1,4 +1,4 @@
-#Sonuvaharris's Changes.
+# Sonuvaharris's Changes.
 Goals of this fork: 
 -use a local python server to handle filesystem read/write for proper saving
 -handle multiple sheets in single instance
