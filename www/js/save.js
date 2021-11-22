@@ -65,7 +65,6 @@ function getSpells(spellLevel) {
 }
 
 function saveSheet(argument) {
-
     var sheet = {
         page1: {
             basic_info: {
@@ -389,9 +388,22 @@ function saveSheet(argument) {
         }
     }
 
-    var saveString = "var loadJson = " + JSON.stringify(sheet);
-    var file = new Blob([saveString], { type: 'application/json' });
-    var a = document.createElement("a"),
+    let saveString = "var loadJson = " + JSON.stringify(sheet) + "end sheet";
+
+    let request = new XMLHttpRequest();
+    request.open("POST", window.url, true);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.onreadystatechange = function () {
+        if (request.readyState === 4 && request.status === 200) {
+            let json = JSON.parse(request.responseText);
+            console.log(json);
+        }
+    };
+
+    request.send(saveString);
+
+    /*let file = new Blob([saveString], { type: 'application/json' });
+    let a = document.createElement("a"),
         url = URL.createObjectURL(file);
     a.href = url;
     a.download = 'savedSheet';
@@ -400,7 +412,7 @@ function saveSheet(argument) {
     setTimeout(function() {
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
-    }, 0);
+    }, 0);*/
 
 
 }

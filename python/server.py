@@ -2,7 +2,7 @@
 https://www.codementor.io/@joaojonesventura/building-a-basic-http-server-from-scratch-in-python-1cedkg0842 """
 
 import socket
-
+import webbrowser
 
 # Define socket host and port
 SERVER_HOST = "0.0.0.0"
@@ -14,21 +14,38 @@ server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 server_socket.bind((SERVER_HOST, SERVER_PORT))
 server_socket.listen(1)
 print("Listening on localhost %s" % SERVER_PORT)
-
+webbrowser.open("http://localhost:%s" % SERVER_PORT, 2, autoraise=True)
 
 while True:
     # Wait for client connections
     client_connection, client_address = server_socket.accept()
 
     # Get the client request
-    request = client_connection.recv(1024).decode()
-    print(request)
+    # header_size = 64
+    # request = client_connection.recv(header_size).decode()
+
+    data = bytearray()
+    while True:
+        chunk = client_connection.recv(64)
+        if not chunk:
+            break
+        print(chunk.decode())
+        data += chunk
+    # print(request)
+    request = data.decode()
+    with open('request.txt', 'w') as f:
+        f.write(request)
+
+    # content_length = request.split("\n")[3]
+    # request += client_connection.recv(int(content_length[16:len(content_length)]) - header_size).decode()
+
+    # print("request: \n" + request)
 
     # Parse HTTP headers
     headers = request.split("\n")
-    filename = headers[0].split()[1]
 
     if headers[0].startswith("GET"):
+        filename = headers[0].split()[1]
         # Get the content of the file
         if filename == "/":
             filename = "/index.html"
@@ -41,9 +58,17 @@ while True:
 
         except FileNotFoundError:
             response = "HTTP/1.0 404 NOT FOUND\n\nFile Not Found"
-    else:
+    elif headers[0].startswith("POST"):
         # turn json into file
-        response = "HTTP/1.0 200 OK\n\n"
+        jsonString = request
+        # while not(jsonString.endswith("end sheet")):
+        #    jsonString += client_connection.recv(4096).decode()
+        jsonString = jsonString[jsonString.index("var"):len(jsonString)]
+        with open('charSheet.json', 'w') as f:
+            f.write(jsonString)
+        response = "HTTP/1.0 200 OK\n\n Saved character sheet"
+    else:
+        response = "HTTP/1.0 500\n\nwtf did you do?"
 
     # Send HTTP response
     client_connection.sendall(response.encode())
@@ -51,39 +76,3 @@ while True:
 
 # Close socket
 server_socket.close()
-
-
-
-"""
-# Python 3 server example
-from http.server import BaseHTTPRequestHandler, HTTPServer
-import time
-import pathlib
-
-hostName = "localhost"
-serverPort = 8080
-
-
-class MyServer(BaseHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header("Content-type", "text/html")
-       self.end_headers()
-
-       file = open("www/" + BaseHTTPRequestHandler.headers., "rb")
-
-       self.wfile.write(file.read())
-
-
-if __name__ == "__main__":
-  webServer = HTTPServer((hostName, serverPort), MyServer)
-   print("Server started http://%s:%s" % (hostName, serverPort))
-
-#   try:
-        webServer.serve_forever()
-   except KeyboardInterrupt:
-       pass
-
-   webServer.server_close()
-   print("Server stopped.")
-"""
