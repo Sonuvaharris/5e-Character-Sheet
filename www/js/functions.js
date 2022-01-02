@@ -90,8 +90,8 @@ function saveCharSheetList() {
 
 function setCharSheet(index) {
     if (index !== CUR_CHARSHEETS_INDEX) {
-        var oldTab = document.getElementsByClassName("nav nav-tabs")[0].getElementsByClassName("active")[0].firstChild.firstChild;
-        var tab = document.getElementsByName("charSheet_" + index)[0];
+        let oldTab = document.getElementsByClassName("nav nav-tabs")[0].getElementsByClassName("active")[0].firstChild.firstChild;
+        let tab = document.getElementsByName("charSheet_" + index)[0];
         if (index != null) {
             if (!tab.parentNode.parentNode.classList.contains("active")) {
                 tab.parentNode.parentNode.classList.add("active");
@@ -109,7 +109,7 @@ function setCharSheet(index) {
 
 //called when adding a new character sheet (pressing the plus button)
 function addCharSheet() {
-    var newName = "Ben Swolo";
+    let newName = "Ben Swolo";
     //can't have duplicates
     if (CHARSHEETS.includes(newName)) {
         let count = 1;
@@ -227,40 +227,40 @@ function loadCharSheet(name, index) {
 }
 
 function saveCharSheet(index) {
-    var charName = CHARSHEETS[index];
+    let charName = CHARSHEETS[index];
     console.log("Saving character sheet for " + charName);
 
-    var allFields = document.getElementsByClassName("characterdialog")[0].getElementsByTagName("input");
-    var allSelects = document.getElementsByClassName("characterdialog")[0].getElementsByTagName("select");
-    var allTextFields = document.getElementsByClassName("characterdialog")[0].getElementsByTagName("textarea");
+    let allFields = document.getElementsByClassName("characterdialog")[0].getElementsByTagName("input");
+    let allSelects = document.getElementsByClassName("characterdialog")[0].getElementsByTagName("select");
+    let allTextFields = document.getElementsByClassName("characterdialog")[0].getElementsByTagName("textarea");
 
     //grab every value on the page and stick it in the Character object
-    var charSheet = {fields: {}, textFields: {}};
-    for (var i=0;i<allFields.length;i++) {
-        var field = allFields[i];
+    let charSheet = {fields: {}, textFields: {}};
+    for (let i=0;i<allFields.length;i++) {
+        let field = allFields[i];
         charSheet.fields[field.name] = {value: field.value, checked: field.checked};
     }
 
-    for (var j=0;j<allSelects.length;j++) {
-        var select = allSelects[j];
+    for (let i=0;i<allSelects.length;i++) {
+        let select = allSelects[i];
         charSheet.fields[select.name] = {value: select.value};
     }
 
     //because getting/saving a radio button group value is retarded
-    for (var k=0;k<document.getElementsByName("attr_CT").length;k++) {
-        if (document.getElementsByName("attr_CT")[k].checked) {
-            var ct = document.getElementsByName("attr_CT")[k].value;
+    for (let i=0;i<document.getElementsByName("attr_CT").length;i++) {
+        if (document.getElementsByName("attr_CT")[i].checked) {
+            let ct = document.getElementsByName("attr_CT")[i].value;
             charSheet.fields["attr_CT"] = {value: ct, checked: false};
             break;
         }
     }
 
-    for (var l=0;l<allTextFields.length;l++) {
-        var textField = allTextFields[l];
+    for (let i=0;i<allTextFields.length;i++) {
+        let textField = allTextFields[i];
         charSheet.textFields[textField.name] = {value: textField.value};
     }
 
-    var stringified = JSON.stringify(charSheet);
+    let stringified = JSON.stringify(charSheet);
     localStorage.setItem(charName, stringified);
     //console.log("Saved Content: " + stringified);
 }
@@ -268,7 +268,7 @@ function saveCharSheet(index) {
 //only called if 2 or more character sheets
 function deleteCharacter() {
     confirm("Are you sure you want to delete this character?");
-    var name = CHARSHEETS[CUR_CHARSHEETS_INDEX];
+    let name = CHARSHEETS[CUR_CHARSHEETS_INDEX];
     CHARSHEETS.splice(CUR_CHARSHEETS_INDEX, 1);
     localStorage.removeItem(name);
     console.log("Deleted Character: " + name);
@@ -286,9 +286,9 @@ function deleteCharacter() {
 
 //generate initial values for calculated values
 function calcData() {
-    for (var i=0;i<document.getElementsByName("attr_CT").length;i++) {
+    for (let i=0;i<document.getElementsByName("attr_CT").length;i++) {
         if (document.getElementsByName("attr_CT")[i].checked) {
-            var ct = document.getElementsByName("attr_CT")[i].value;
+            let ct = document.getElementsByName("attr_CT")[i].value;
             if (ct == "-10[Helpless]") {
                 ct = -10;
             }
@@ -299,25 +299,25 @@ function calcData() {
     }
 
     //set attributes
-    for (var j=0;j<Attributes.length;j++) {
+    for (let j=0;j<Attributes.length;j++) {
         calcAttributeMod(Attributes[j]);
     }
 
     //set skills
-    for (var k=0;k<Skills.length;k++) {
+    for (let k=0;k<Skills.length;k++) {
         calcSkill(Skills[k]);
     }
 
     //set attacks
-    var attackCount = parseInt(document.getElementsByName("attr_AttackCount")[0].value);
-    for (var l=0;l<attackCount;l++) {
+    let attackCount = parseInt(document.getElementsByName("attr_AttackCount")[0].value);
+    for (let l=0;l<attackCount;l++) {
         calcAttack(l);
         calcDamage(l);
     }
 
     //set items
-    var itemCount = parseInt(document.getElementsByName("attr_ItemCount")[0].value);
-    for (var m=0;m<itemCount;m++) {
+    let itemCount = parseInt(document.getElementsByName("attr_ItemCount")[0].value);
+    for (let m=0;m<itemCount;m++) {
         calcItemValue(m, true);
         calcItemWeight(m, true);
     }

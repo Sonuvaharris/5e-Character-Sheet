@@ -1,4 +1,4 @@
-var LOCKED = false;
+let LOCKED = false;
 
 function lock(argument) {
     LOCKED = !LOCKED;
@@ -22,61 +22,43 @@ function updateMod(att, score) {
 }
 
 function updateSaves() {
-    var prof = parseInt($('#top-bar input[name="proficiency"]').val()) || 0;
+    let base = 0;
+    let save = 0;
+    let prof = parseInt($('#top-bar input[name="proficiency"]').val()) || 0;
 
-    var strProf = $('#saves #str-save input[name="prof"]').prop("checked") === true ? prof : 0;
-    var base = parseInt($('#attributes input[name="str-mod"]').val()) || 0;
-    var save = ((base + strProf) < 0 ? "" : "+") + (base + strProf);
+    let strProf = $('#saves #str-save input[name="prof"]').prop("checked") === true ? prof : 0;
+    base = parseInt($('#attributes input[name="str-mod"]').val()) || 0;
+    save = ((base + strProf) < 0 ? "" : "+") + (base + strProf);
     $('#saves input[name="str-save"]').val(save);
 
-    if ($('#saves #dex-save input[name="prof"]').prop("checked") === true) {
-        var dexProf = prof;
-    } else {
-        var dexProf = 0;
-    }
-    var base = parseInt($('#attributes input[name="dex-mod"]').val()) || 0;
-    var save = ((base + dexProf) < 0 ? "" : "+") + (base + dexProf);
+    let dexProf = $('#saves #dex-save input[name="prof"]').prop("checked") === true ? prof : 0;
+    base = parseInt($('#attributes input[name="dex-mod"]').val()) || 0;
+    save = ((base + dexProf) < 0 ? "" : "+") + (base + dexProf);
     $('#saves input[name="dex-save"]').val(save);
 
-    if ($('#saves #con-save input[name="prof"]').prop("checked") === true) {
-        var conProf = prof;
-    } else {
-        var conProf = 0;
-    }
-    var base = parseInt($('#attributes input[name="con-mod"]').val()) || 0;
-    var save = ((base + conProf) < 0 ? "" : "+") + (base + conProf);
+    let conProf = $('#saves #con-save input[name="prof"]').prop("checked") === true ? prof : 0;
+    base = parseInt($('#attributes input[name="con-mod"]').val()) || 0;
+    save = ((base + conProf) < 0 ? "" : "+") + (base + conProf);
     $('#saves input[name="con-save"]').val(save);
 
-    if ($('#saves #int-save input[name="prof"]').prop("checked") === true) {
-        var intProf = prof;
-    } else {
-        var intProf = 0;
-    }
-    var base = parseInt($('#attributes input[name="int-mod"]').val()) || 0;
-    var save = ((base + intProf) < 0 ? "" : "+") + (base + intProf);
+    let intProf = $('#saves #int-save input[name="prof"]').prop("checked") === true ? prof : 0;
+    base = parseInt($('#attributes input[name="int-mod"]').val()) || 0;
+    save = ((base + intProf) < 0 ? "" : "+") + (base + intProf);
     $('#saves input[name="int-save"]').val(save);
 
-    if ($('#saves #wis-save input[name="prof"]').prop("checked") === true) {
-        var wisProf = prof;
-    } else {
-        var wisProf = 0;
-    }
-    var base = parseInt($('#attributes input[name="wis-mod"]').val()) || 0;
-    var save = ((base + wisProf) < 0 ? "" : "+") + (base + wisProf);
+    let wisProf = $('#saves #wis-save input[name="prof"]').prop("checked") === true ? prof : 0;
+    base = parseInt($('#attributes input[name="wis-mod"]').val()) || 0;
+    save = ((base + wisProf) < 0 ? "" : "+") + (base + wisProf);
     $('#saves input[name="wis-save"]').val(save);
 
-    if ($('#saves #cha-save input[name="prof"]').prop("checked") === true) {
-        var chaProf = prof;
-    } else {
-        var chaProf = 0;
-    }
-    var base = parseInt($('#attributes input[name="cha-mod"]').val()) || 0;
-    var save = ((base + chaProf) < 0 ? "" : "+") + (base + chaProf);
+    let chaProf = $('#saves #cha-save input[name="prof"]').prop("checked") === true ? prof : 0;
+    base = parseInt($('#attributes input[name="cha-mod"]').val()) || 0;
+    save = ((base + chaProf) < 0 ? "" : "+") + (base + chaProf);
     $('#saves input[name="cha-save"]').val(save);
 }
 
 function updateSpells() {
-    var att = $('#saves-skills select[name="spell-att"]').val();
+    let att = $('#saves-skills select[name="spell-att"]').val();
 
     if (att === 'none') {
         $('#top-bar input[name="spell-dc"]').val('Na');
@@ -84,16 +66,16 @@ function updateSpells() {
         return;
     }
 
-    var base = parseInt($('#attributes input[name="' + att + '-mod"]').val()) || 0;
-    var prof = parseInt($('#top-bar input[name="proficiency"]').val()) || 0;
+    let base = parseInt($('#attributes input[name="' + att + '-mod"]').val()) || 0;
+    let prof = parseInt($('#top-bar input[name="proficiency"]').val()) || 0;
 
     //Update DC
-    var dc = 8 + base + prof;
+    let dc = 8 + base + prof;
     $('#top-bar input[name="spell-dc"]').val(dc);
     $('#spell-info input[name="dc"]').val(dc);
 
     //Update Spell Bonus
-    var bonus = base + prof;
+    let bonus = base + prof;
     $('#spell-info input[name="bonus"]').val("+" + bonus);
 
     //Update Spell Attribute
@@ -101,9 +83,9 @@ function updateSpells() {
 }
 
 function updateStrSkills() {
-    var prof = parseInt($('#top-bar input[name="proficiency"]').val()) || 0;
-    var base = parseInt($('#attributes input[name="str-mod"]').val()) || 0;
-    var skillProf = 0;
+    let prof = parseInt($('#top-bar input[name="proficiency"]').val()) || 0;
+    let base = parseInt($('#attributes input[name="str-mod"]').val()) || 0;
+    let skillProf = 0;
     if ($('.skills #athletics-skill input[name="prof"]').prop("checked") === true) {
         skillProf = prof;
     } else {
@@ -113,251 +95,255 @@ function updateStrSkills() {
         skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    let skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
     $('.skills #athletics-skill input[type="text"]').val(skill);
 }
 
 function updateDexSkills() {
-    var prof = parseInt($('#top-bar input[name="proficiency"]').val()) || 0;
-    var base = parseInt($('#attributes input[name="dex-mod"]').val()) || 0;
+    let prof = parseInt($('#top-bar input[name="proficiency"]').val()) || 0;
+    let base = parseInt($('#attributes input[name="dex-mod"]').val()) || 0;
+    let skillProf;
 
     if ($('.skills #acrobatics-skill input[name="prof"]').prop("checked") === true) {
-        var skillProf = prof;
+        skillProf = prof;
     } else {
-        var skillProf = 0;
+        skillProf = 0;
     }
     if ($('.skills #acrobatics-skill input[name="expr"]').prop("checked") === true) {
-        var skillProf = prof * 2;
+        skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
     $('.skills #acrobatics-skill input[type="text"]').val(skill);
 
-    if ($('.skills #sleight-hand-skill input[name="prof"]').prop("checked") == true) {
-        var skillProf = prof;
+    if ($('.skills #sleight-hand-skill input[name="prof"]').prop("checked") === true) {
+        skillProf = prof;
     } else {
-        var skillProf = 0;
+        skillProf = 0;
     }
-    if ($('.skills #sleight-hand-skill input[name="expr"]').prop("checked") == true) {
-        var skillProf = prof * 2;
+    if ($('.skills #sleight-hand-skill input[name="expr"]').prop("checked") === true) {
+        skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
     $('.skills #sleight-hand-skill input[type="text"]').val(skill);
 
-    if ($('.skills #stealth-skill input[name="prof"]').prop("checked") == true) {
-        var skillProf = prof;
+    if ($('.skills #stealth-skill input[name="prof"]').prop("checked") === true) {
+        skillProf = prof;
     } else {
-        var skillProf = 0;
+        skillProf = 0;
     }
-    if ($('.skills #stealth-skill input[name="expr"]').prop("checked") == true) {
-        var skillProf = prof * 2;
+    if ($('.skills #stealth-skill input[name="expr"]').prop("checked") === true) {
+        skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    let skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
     $('.skills #stealth-skill input[type="text"]').val(skill);
 }
 
 function updateIntSkills() {
-    var prof = parseInt($('#top-bar input[name="proficiency"]').val()) || 0;
-    var base = parseInt($('#attributes input[name="int-mod"]').val()) || 0;
+    let prof = parseInt($('#top-bar input[name="proficiency"]').val()) || 0;
+    let base = parseInt($('#attributes input[name="int-mod"]').val()) || 0;
+    let skillProf;
+    let skill;
 
-    if ($('.skills #arcana-skill input[name="prof"]').prop("checked") == true) {
-        var skillProf = prof;
+    if ($('.skills #arcana-skill input[name="prof"]').prop("checked") === true) {
+        skillProf = prof;
     } else {
-        var skillProf = 0;
+        skillProf = 0;
     }
-    if ($('.skills #arcana-skill input[name="expr"]').prop("checked") == true) {
-        var skillProf = prof * 2;
+    if ($('.skills #arcana-skill input[name="expr"]').prop("checked") === true) {
+        skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
     $('.skills #arcana-skill input[type="text"]').val(skill);
 
-    if ($('.skills #history-skill input[name="prof"]').prop("checked") == true) {
-        var skillProf = prof;
+    if ($('.skills #history-skill input[name="prof"]').prop("checked") === true) {
+        skillProf = prof;
     } else {
-        var skillProf = 0;
+        skillProf = 0;
     }
-    if ($('.skills #history-skill input[name="expr"]').prop("checked") == true) {
-        var skillProf = prof * 2;
+    if ($('.skills #history-skill input[name="expr"]').prop("checked") === true) {
+        skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
     $('.skills #history-skill input[type="text"]').val(skill);
 
-    if ($('.skills #investigation-skill input[name="prof"]').prop("checked") == true) {
-        var skillProf = prof;
+    if ($('.skills #investigation-skill input[name="prof"]').prop("checked") === true) {
+        skillProf = prof;
     } else {
-        var skillProf = 0;
+        skillProf = 0;
     }
-    if ($('.skills #investigation-skill input[name="expr"]').prop("checked") == true) {
-        var skillProf = prof * 2;
+    if ($('.skills #investigation-skill input[name="expr"]').prop("checked") === true) {
+        skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
     $('.skills #investigation-skill input[type="text"]').val(skill);
 
-    if ($('.skills #religion-skill input[name="prof"]').prop("checked") == true) {
-        var skillProf = prof;
+    if ($('.skills #religion-skill input[name="prof"]').prop("checked") === true) {
+        skillProf = prof;
     } else {
-        var skillProf = 0;
+        skillProf = 0;
     }
-    if ($('.skills #religion-skill input[name="expr"]').prop("checked") == true) {
-        var skillProf = prof * 2;
+    if ($('.skills #religion-skill input[name="expr"]').prop("checked") === true) {
+        skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
     $('.skills #religion-skill input[type="text"]').val(skill);
-
 }
 
 function updateWisSkills() {
-    var prof = parseInt($('#top-bar input[name="proficiency"]').val()) || 0;
-    var base = parseInt($('#attributes input[name="wis-mod"]').val()) || 0;
+    let prof = parseInt($('#top-bar input[name="proficiency"]').val()) || 0;
+    let base = parseInt($('#attributes input[name="wis-mod"]').val()) || 0;
+    let skillProf;
+    let skill;
 
-    if ($('.skills #animal-handling-skill input[name="prof"]').prop("checked") == true) {
-        var skillProf = prof;
+    if ($('.skills #animal-handling-skill input[name="prof"]').prop("checked") === true) {
+        skillProf = prof;
     } else {
-        var skillProf = 0;
+        skillProf = 0;
     }
 
-    if ($('.skills #animal-handling-skill input[name="expr"]').prop("checked") == true) {
-        var skillProf = prof * 2;
+    if ($('.skills #animal-handling-skill input[name="expr"]').prop("checked") === true) {
+        skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
 
     $('.skills #animal-handling-skill input[type="text"]').val(skill);
 
-    if ($('.skills #insight-skill input[name="prof"]').prop("checked") == true) {
-        var skillProf = prof;
+    if ($('.skills #insight-skill input[name="prof"]').prop("checked") === true) {
+        skillProf = prof;
     } else {
-        var skillProf = 0;
+        skillProf = 0;
     }
 
-    if ($('.skills #insight-skill input[name="expr"]').prop("checked") == true) {
-        var skillProf = prof * 2;
+    if ($('.skills #insight-skill input[name="expr"]').prop("checked") === true) {
+        skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
 
     $('.skills #insight-skill input[type="text"]').val(skill);
 
-    if ($('.skills #medicine-skill input[name="prof"]').prop("checked") == true) {
-        var skillProf = prof;
+    if ($('.skills #medicine-skill input[name="prof"]').prop("checked") === true) {
+        skillProf = prof;
     } else {
-        var skillProf = 0;
+        skillProf = 0;
     }
 
-    if ($('.skills #medicine-skill input[name="expr"]').prop("checked") == true) {
-        var skillProf = prof * 2;
+    if ($('.skills #medicine-skill input[name="expr"]').prop("checked") === true) {
+        skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
 
     $('.skills #medicine-skill input[type="text"]').val(skill);
 
-    if ($('.skills #nature-skill input[name="prof"]').prop("checked") == true) {
-        var skillProf = prof;
+    if ($('.skills #nature-skill input[name="prof"]').prop("checked") === true) {
+        skillProf = prof;
     } else {
-        var skillProf = 0;
+        skillProf = 0;
     }
-    if ($('.skills #nature-skill input[name="expr"]').prop("checked") == true) {
-        var skillProf = prof * 2;
+    if ($('.skills #nature-skill input[name="expr"]').prop("checked") === true) {
+        skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
     $('.skills #nature-skill input[type="text"]').val(skill);
 
-    if ($('.skills #perception-skill input[name="prof"]').prop("checked") == true) {
-        var skillProf = prof;
+    if ($('.skills #perception-skill input[name="prof"]').prop("checked") === true) {
+        skillProf = prof;
     } else {
-        var skillProf = 0;
+        skillProf = 0;
     }
 
-    if ($('.skills #perception-skill input[name="expr"]').prop("checked") == true) {
-        var skillProf = prof * 2;
+    if ($('.skills #perception-skill input[name="expr"]').prop("checked") === true) {
+        skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
 
     $('.skills #perception-skill input[type="text"]').val(skill);
 
-    if ($('.skills #survival-skill input[name="prof"]').prop("checked") == true) {
-        var skillProf = prof;
+    if ($('.skills #survival-skill input[name="prof"]').prop("checked") === true) {
+        skillProf = prof;
     } else {
-        var skillProf = 0;
+        skillProf = 0;
     }
 
-    if ($('.skills #survival-skill input[name="expr"]').prop("checked") == true) {
-        var skillProf = prof * 2;
+    if ($('.skills #survival-skill input[name="expr"]').prop("checked") === true) {
+        skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
 
     $('.skills #survival-skill input[type="text"]').val(skill);
-
 }
 
 function updateChaSkills() {
-    var prof = parseInt($('#top-bar input[name="proficiency"]').val()) || 0;
-    var base = parseInt($('#attributes input[name="cha-mod"]').val()) || 0;
+    let prof = parseInt($('#top-bar input[name="proficiency"]').val()) || 0;
+    let base = parseInt($('#attributes input[name="cha-mod"]').val()) || 0;
+    let skillProf
+    let skill;
 
-    if ($('.skills #deception-skill input[name="prof"]').prop("checked") == true) {
-        var skillProf = prof;
+    if ($('.skills #deception-skill input[name="prof"]').prop("checked") === true) {
+        skillProf = prof;
     } else {
-        var skillProf = 0;
+        skillProf = 0;
     }
-    if ($('.skills #deception-skill input[name="expr"]').prop("checked") == true) {
-        var skillProf = prof * 2;
+    if ($('.skills #deception-skill input[name="expr"]').prop("checked") === true) {
+        skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
     $('.skills #deception-skill input[type="text"]').val(skill);
 
-    if ($('.skills #intimidation-skill input[name="prof"]').prop("checked") == true) {
-        var skillProf = prof;
+    if ($('.skills #intimidation-skill input[name="prof"]').prop("checked") === true) {
+        skillProf = prof;
     } else {
-        var skillProf = 0;
+        skillProf = 0;
     }
-    if ($('.skills #intimidation-skill input[name="expr"]').prop("checked") == true) {
-        var skillProf = prof * 2;
+    if ($('.skills #intimidation-skill input[name="expr"]').prop("checked") === true) {
+        skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
     $('.skills #intimidation-skill input[type="text"]').val(skill);
 
-    if ($('.skills #performance-skill input[name="prof"]').prop("checked") == true) {
-        var skillProf = prof;
+    if ($('.skills #performance-skill input[name="prof"]').prop("checked") === true) {
+        skillProf = prof;
     } else {
-        var skillProf = 0;
+        skillProf = 0;
     }
-    if ($('.skills #performance-skill input[name="expr"]').prop("checked") == true) {
-        var skillProf = prof * 2;
+    if ($('.skills #performance-skill input[name="expr"]').prop("checked") === true) {
+        skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
     $('.skills #performance-skill input[type="text"]').val(skill);
 
-    if ($('.skills #persuasion-skill input[name="prof"]').prop("checked") == true) {
-        var skillProf = prof;
+    if ($('.skills #persuasion-skill input[name="prof"]').prop("checked") === true) {
+        skillProf = prof;
     } else {
-        var skillProf = 0;
+        skillProf = 0;
     }
-    if ($('.skills #persuasion-skill input[name="expr"]').prop("checked") == true) {
-        var skillProf = prof * 2;
+    if ($('.skills #persuasion-skill input[name="expr"]').prop("checked") === true) {
+        skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
     $('.skills #persuasion-skill input[type="text"]').val(skill);
-
 }
 
 
 function updateStrMisc() {
-    var base = parseInt($('#attributes input[name="str-mod"]').val()) || 0;
-    var score = parseInt($('#attributes input[name="str"]').val()) || 0;
+    let base = parseInt($('#attributes input[name="str-mod"]').val()) || 0;
+    let score = parseInt($('#attributes input[name="str"]').val()) || 0;
 
     $('#encumberance input[name="base-encumberance"]').val(score * 5);
     $('#encumberance input[name="encumbered-encumberance"]').val(score * 10);
@@ -367,33 +353,33 @@ function updateStrMisc() {
 }
 
 function updateDexMisc() {
-    var base = parseInt($('#attributes input[name="dex-mod"]').val()) || 0;
-    var score = parseInt($('#attributes input[name="dex"]').val()) || 0;
+    let base = parseInt($('#attributes input[name="dex-mod"]').val()) || 0;
+    let score = parseInt($('#attributes input[name="dex"]').val()) || 0;
 
 }
 
 function updateWisMisc() {
-    var prof = parseInt($('#top-bar input[name="proficiency"]').val()) || 0;
-    var base = parseInt($('#attributes input[name="wis-mod"]').val()) || 0;
-    var score = parseInt($('#attributes input[name="wis"]').val()) || 0;
+    let prof = parseInt($('#top-bar input[name="proficiency"]').val()) || 0;
+    let base = parseInt($('#attributes input[name="wis-mod"]').val()) || 0;
+    let score = parseInt($('#attributes input[name="wis"]').val()) || 0;
 
     if ($('.skills #perception-skill input[name="prof"]').prop("checked") == true) {
-        var skillProf = prof;
+        let skillProf = prof;
     } else {
-        var skillProf = 0;
+        let skillProf = 0;
     }
 
     if ($('.skills #perception-skill input[name="expr"]').prop("checked") == true) {
-        var skillProf = prof * 2;
+        let skillProf = prof * 2;
     }
 
-    var skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
+    let skill = ((base + skillProf) < 0 ? "" : "+") + (base + skillProf);
 
     $('#top-bar input[name="passive-perception"]').val(10 + parseInt(skill));
 }
 
 function calculateTotalWeight(argument) {
-    var total = 0;
+    let total = 0;
     $('#equipment input[name="weight"]').each(function(argument) {
         total += parseFloat($(this).val()) || 0;
     });
@@ -402,34 +388,35 @@ function calculateTotalWeight(argument) {
 }
 
 function calculateTotalCurrency(argument) {
-    var total = 0;
-    var base = $('#equipment #currancy select[name="base"]').val();
+    let total = 0;
+    let base = $('#equipment #currancy select[name="base"]').val();
 
     $('#equipment #currancy input:not([name="total"])').each(function(argument) {
+        let modifier;
         switch ($(this).attr("name")) {
             case 'copper':
-                var copper = parseInt($(this).val()) || 0;
-                var modifier = cacluateCurrencyMod('copper', base);
+                let copper = parseInt($(this).val()) || 0;
+                modifier = cacluateCurrencyMod('copper', base);
                 total += copper * modifier;
                 break;
             case 'silver':
-                var silver = parseInt($(this).val()) || 0;
-                var modifier = cacluateCurrencyMod('silver', base);
+                let silver = parseInt($(this).val()) || 0;
+                modifier = cacluateCurrencyMod('silver', base);
                 total += silver * modifier;
                 break;
             case 'gold':
-                var gold = parseInt($(this).val()) || 0;
-                var modifier = cacluateCurrencyMod('gold', base);
+                let gold = parseInt($(this).val()) || 0;
+                modifier = cacluateCurrencyMod('gold', base);
                 total += gold * modifier;
                 break;
             case 'electrum':
-                var electrum = parseInt($(this).val()) || 0;
-                var modifier = cacluateCurrencyMod('electrum', base);
+                let electrum = parseInt($(this).val()) || 0;
+                modifier = cacluateCurrencyMod('electrum', base);
                 total += electrum * modifier;
                 break;
             case 'platinum':
-                var platinum = parseInt($(this).val()) || 0;
-                var modifier = cacluateCurrencyMod('platinum', base);
+                let platinum = parseInt($(this).val()) || 0;
+                modifier = cacluateCurrencyMod('platinum', base);
                 total += platinum * modifier;
                 break;
         }
@@ -516,12 +503,12 @@ function cacluateCurrencyMod(coin, base) {
 }
 
 function updateSpellSlots(total) {
-    var totalSlots = parseInt(total.val()) || 0;
-    var number = total.attr('name').substring(-1);
-    var slots = total.parent().parent().find('div#slots');
+    let totalSlots = parseInt(total.val()) || 0;
+    let number = total.attr('name').substring(-1);
+    let slots = total.parent().parent().find('div#slots');
     slots.empty();
 
-    for (var i = totalSlots - 1; i >= 0; i--) {
+    for (let i = totalSlots - 1; i >= 0; i--) {
         slots.append('<input type="checkbox" name="slot-' + number + '">')
     }
 }

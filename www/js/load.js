@@ -1,21 +1,49 @@
+//global for tracking all available sheets
+let sheetList = [];
+
 function loadNewSheet(argument) {
     location.reload();
 }
 
-$(document).ready(function(argument) {
+function loadSheet(sheetName) {
+    console.log("loading " + sheetName + "...")
+    let getSheetRequest = new XMLHttpRequest();
+    getSheetRequest.open("GET", window.location.href + sheetName, true);
+    getSheetRequest.setRequestHeader("Content-Type", "application/json");
+    getSheetRequest.onreadystatechange = function () {
+        if (getSheetRequest.readyState === 4 && getSheetRequest.status === 200) {
+            //console.log(getSheetRequest.responseText);
+            let loadJson = JSON.parse(getSheetRequest.responseText);
+            renderSheet(loadJson)
+        }
+        else if (getSheetRequest.readyState === 4 && getSheetRequest.status === 404) {
+            console.error("Character sheet not found for " + sheetName)
+            sheetList.remove(sheetList.indexOf(sheetName));
+            //TODO update server with new string
 
+            if (sheetList.length > 0) {
+                loadSheet(sheetList[0])
+            } else {
+                loadSheet("default")
+            }
+        }
+    };
+    getSheetRequest.send();
+}
+
+function renderSheet(loadJson) {
     //Change the title to the character name
-    if (loadJson.page1.basic_info.char_name)
+    /*if (loadJson.page1.basic_info.char_name) {
         document.title = loadJson.page1.basic_info.char_name;
+    }*/
 
     //Load Basic Info
     $('#character-basic-info #basic-info input[name="char-name"]').val(loadJson.page1.basic_info.char_name);
     $('#character-basic-info #basic-info input[name="level"]').val(loadJson.page1.basic_info.level);
-    $('#character-basic-info #basic-info input[name="level-two"]').val(loadJson.page1.basic_info.level_two);
+    $('#character-basic-info #basic-info input[name="background"]').val(loadJson.page1.basic_info.background);
 
     //Load Character Info
     $('#character-basic-info #character-info input[name="race-class"]').val(loadJson.page1.character_info.race_class);
-    $('#character-basic-info #character-info input[name="background"]').val(loadJson.page1.character_info.background);
     $('#character-basic-info #character-info input[name="player-name"]').val(loadJson.page1.character_info.player_name);
     $('#character-basic-info #character-info input[name="exp"]').val(loadJson.page1.character_info.exp);
     $('#character-basic-info #character-info input[name="alignment"]').val(loadJson.page1.character_info.alignment);
@@ -44,7 +72,7 @@ $(document).ready(function(argument) {
     $('#page-1 #attributes input[name="cha"]').val(loadJson.page1.attributes.cha);
     $('#page-1 #attributes input[name="cha-mod"]').val(loadJson.page1.attributes.cha_mod);
 
-    //Load Skills and Saves	
+    //Load Skills and Saves
     $('#page-1 #saves-skills select[name="spell-att"]').val(loadJson.page1.saves_skills.spell_casting);
     if (!$('#saves-skills select[name="spell-att"]').val()) {
         $('#saves-skills select[name="spell-att"]').val('none').change();
@@ -157,13 +185,15 @@ $(document).ready(function(argument) {
 
     //Load Attacks
     $.each(loadJson.page1.attacks_spells, function(index, value) {
-        $('#page-1 #attacks-spells #attacks tbody').append(`
-            <tr>                    <td><input type="text" name="name" value="` + value.name + `"/></td>
+        $("#page-1 #attacks-spells #attacks tbody").append(`
+            <tr>                    
+                <td><input type="text" name="name" value="` + value.name + `"/></td>
                 <td><input type="text" name="stat" value="` + value.stat + `"/></td>
                 <td><input type="text" name="toHit" value="` + value.toHit + `"/></td>
                 <td><input type="text" name="damage" value="` + value.damage + `"/></td>
                 <td><input type="text" name="damage_type" value="` + value.damage_type + `"/></td>
-                <td><button>X</button></td>                </tr>
+                <td><button>X</button></td>
+            </tr>
             `);
     });
 
@@ -198,18 +228,18 @@ $(document).ready(function(argument) {
 
     //Load Equipment
     $.each(loadJson.page2.equipment.val.col_1, function(index, value) {
-        var child = index + 2;
+        let child = index + 2;
         $('#page-2 #equipment .col-1 tr:nth-child(' + child + ') input[name="name"]').val(value.name);
         $('#page-2 #equipment .col-1 tr:nth-child(' + child + ') input[name="weight"]').val(value.weight);
     });
 
     $.each(loadJson.page2.equipment.val.col_2, function(index, value) {
-        var child = index + 1;
+        let child = index + 1;
         $('#page-2 #equipment .col-2 tr:nth-child(' + child + ') input[name="name"]').val(value.name);
         $('#page-2 #equipment .col-2 tr:nth-child(' + child + ') input[name="weight"]').val(value.weight);
     });
 
-    $('#page-2 #equipment tr#total input[name="total-weight"').val(loadJson.page2.equipment.total_weight);
+    $('#page-2 #equipment tr#total input[name="total-weight"]').val(loadJson.page2.equipment.total_weight);
 
     $('#page-2 #currancy input[name="copper"]').val(loadJson.page2.equipment.currency.copper);
     $('#page-2 #currancy input[name="silver"]').val(loadJson.page2.equipment.currency.silver);
@@ -265,7 +295,7 @@ $(document).ready(function(argument) {
 
     //Load Spells
     $.each(loadJson.page3.spells.cantrips.spells, function(index, value) {
-        var child = index + 1;
+        let child = index + 1;
         $('#page-3 #spells #cantrips .spells .spell:nth-child(' + child + ') input[name="spell-name"]').val(value.spell_name);
     });
 
@@ -273,7 +303,7 @@ $(document).ready(function(argument) {
     //In changes.js
     updateSpellSlots($('#page-3 #spells #level-1 input[name="total-1"]'));
     $.each(loadJson.page3.spells.level_1.spells, function(index, value) {
-        var child = index + 1;
+        let child = index + 1;
         $('#page-3 #spells #level-1 .spells .spell:nth-child(' + child + ') input[name="preped"]').prop("checked", value.preped);
         $('#page-3 #spells #level-1 .spells .spell:nth-child(' + child + ') input[name="spell-name"]').val(value.spell_name);
     });
@@ -283,7 +313,7 @@ $(document).ready(function(argument) {
     //In changes.js
     updateSpellSlots($('#page-3 #spells #level-2 input[name="total-2"]'));
     $.each(loadJson.page3.spells.level_2.spells, function(index, value) {
-        var child = index + 1;
+        let child = index + 1;
         $('#page-3 #spells #level-2 .spells .spell:nth-child(' + child + ') input[name="preped"]').prop("checked", value.preped);
         $('#page-3 #spells #level-2 .spells .spell:nth-child(' + child + ') input[name="spell-name"]').val(value.spell_name);
     });
@@ -293,7 +323,7 @@ $(document).ready(function(argument) {
     //In changes.js
     updateSpellSlots($('#page-3 #spells #level-3 input[name="total-3"]'));
     $.each(loadJson.page3.spells.level_3.spells, function(index, value) {
-        var child = index + 1;
+        let child = index + 1;
         $('#page-3 #spells #level-3 .spells .spell:nth-child(' + child + ') input[name="preped"]').prop("checked", value.preped);
         $('#page-3 #spells #level-3 .spells .spell:nth-child(' + child + ') input[name="spell-name"]').val(value.spell_name);
     });
@@ -303,7 +333,7 @@ $(document).ready(function(argument) {
     //In changes.js
     updateSpellSlots($('#page-3 #spells #level-4 input[name="total-4"]'));
     $.each(loadJson.page3.spells.level_4.spells, function(index, value) {
-        var child = index + 1;
+        let child = index + 1;
         $('#page-3 #spells #level-4 .spells .spell:nth-child(' + child + ') input[name="preped"]').prop("checked", value.preped);
         $('#page-3 #spells #level-4 .spells .spell:nth-child(' + child + ') input[name="spell-name"]').val(value.spell_name);
     });
@@ -313,7 +343,7 @@ $(document).ready(function(argument) {
     //In changes.js
     updateSpellSlots($('#page-3 #spells #level-5 input[name="total-5"]'));
     $.each(loadJson.page3.spells.level_5.spells, function(index, value) {
-        var child = index + 1;
+        let child = index + 1;
         $('#page-3 #spells #level-5 .spells .spell:nth-child(' + child + ') input[name="preped"]').prop("checked", value.preped);
         $('#page-3 #spells #level-5 .spells .spell:nth-child(' + child + ') input[name="spell-name"]').val(value.spell_name);
     });
@@ -323,7 +353,7 @@ $(document).ready(function(argument) {
     //In changes.js
     updateSpellSlots($('#page-3 #spells #level-6 input[name="total-6"]'));
     $.each(loadJson.page3.spells.level_6.spells, function(index, value) {
-        var child = index + 1;
+        let child = index + 1;
         $('#page-3 #spells #level-6 .spells .spell:nth-child(' + child + ') input[name="preped"]').prop("checked", value.preped);
         $('#page-3 #spells #level-6 .spells .spell:nth-child(' + child + ') input[name="spell-name"]').val(value.spell_name);
     });
@@ -333,7 +363,7 @@ $(document).ready(function(argument) {
     //In changes.js
     updateSpellSlots($('#page-3 #spells #level-7 input[name="total-7"]'));
     $.each(loadJson.page3.spells.level_7.spells, function(index, value) {
-        var child = index + 1;
+        let child = index + 1;
         $('#page-3 #spells #level-7 .spells .spell:nth-child(' + child + ') input[name="preped"]').prop("checked", value.preped);
         $('#page-3 #spells #level-7 .spells .spell:nth-child(' + child + ') input[name="spell-name"]').val(value.spell_name);
     });
@@ -343,7 +373,7 @@ $(document).ready(function(argument) {
     //In changes.js
     updateSpellSlots($('#page-3 #spells #level-8 input[name="total-8"]'));
     $.each(loadJson.page3.spells.level_8.spells, function(index, value) {
-        var child = index + 1;
+        let child = index + 1;
         $('#page-3 #spells #level-8 .spells .spell:nth-child(' + child + ') input[name="preped"]').prop("checked", value.preped);
         $('#page-3 #spells #level-8 .spells .spell:nth-child(' + child + ') input[name="spell-name"]').val(value.spell_name);
     });
@@ -353,11 +383,26 @@ $(document).ready(function(argument) {
     //In changes.js
     updateSpellSlots($('#page-3 #spells #level-9 input[name="total-9"]'));
     $.each(loadJson.page3.spells.level_9.spells, function(index, value) {
-        var child = index + 1;
+        let child = index + 1;
         $('#page-3 #spells #level-9 .spells .spell:nth-child(' + child + ') input[name="preped"]').prop("checked", value.preped);
         $('#page-3 #spells #level-9 .spells .spell:nth-child(' + child + ') input[name="spell-name"]').val(value.spell_name);
     });
 
+    console.log("sheet loaded")
+}
 
+window.addEventListener('DOMContentLoaded', (event) => {
+    //load list of char sheets
+    let sheetListRequest = new XMLHttpRequest();
 
+    sheetListRequest.open("GET", window.location.href + "all_sheets", true);
+    sheetListRequest.setRequestHeader("Content-Type", "text/plain");
+    sheetListRequest.onreadystatechange = function () {
+        if (sheetListRequest.readyState === 4 && sheetListRequest.status === 200) {
+            sheetList = sheetListRequest.responseText.split(",");
+            //get 1st sheet
+            loadSheet(sheetList[0]);
+        }
+    };
+    sheetListRequest.send();
 });
