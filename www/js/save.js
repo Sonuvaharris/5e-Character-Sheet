@@ -67,12 +67,10 @@ function getSpells(spellLevel) {
 function saveSheet(argument) {
     let sheet = {
         page1: {
-            basic_info: {
-                char_name: $("#character-basic-info #basic-info input[name='char-name']").val(),
-                level: $("#character-basic-info #basic-info input[name='level']").val(),
-                background: $("#character-basic-info #basic-info input[name='background']").val(),
-            },
             character_info: {
+                char_name: $("#character-basic-info #character-info input[name='char-name']").val(),
+                level: $("#character-basic-info #character-info input[name='level']").val(),
+                background: $("#character-basic-info #character-info input[name='background']").val(),
                 race_class: $("#character-basic-info #character-info input[name='race-class']").val(),
                 player_name: $("#character-basic-info #character-info input[name='player-name']").val(),
                 exp: $("#character-basic-info #character-info input[name='exp']").val(),

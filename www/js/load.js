@@ -5,30 +5,48 @@ function loadNewSheet(argument) {
     location.reload();
 }
 
-function loadSheet(sheetName) {
-    console.log("loading " + sheetName + "...")
-    let getSheetRequest = new XMLHttpRequest();
-    getSheetRequest.open("GET", window.location.href + sheetName, true);
-    getSheetRequest.setRequestHeader("Content-Type", "application/json");
-    getSheetRequest.onreadystatechange = function () {
-        if (getSheetRequest.readyState === 4 && getSheetRequest.status === 200) {
-            //console.log(getSheetRequest.responseText);
-            let loadJson = JSON.parse(getSheetRequest.responseText);
-            renderSheet(loadJson)
-        }
-        else if (getSheetRequest.readyState === 4 && getSheetRequest.status === 404) {
-            console.error("Character sheet not found for " + sheetName)
-            sheetList.remove(sheetList.indexOf(sheetName));
-            //TODO update server with new string
 
-            if (sheetList.length > 0) {
-                loadSheet(sheetList[0])
-            } else {
-                loadSheet("default")
-            }
+//called when sheetList is empty or invalid. Automatically calls loadSheet(sheetList[0]) on successful response from server
+function loadSheetList() {
+    let sheetListRequest = new XMLHttpRequest();
+
+    sheetListRequest.open("GET", window.location.href + "all_sheets", true);
+    sheetListRequest.setRequestHeader("Content-Type", "text/plain");
+    sheetListRequest.onload = function () {
+        if (sheetListRequest.status === 200) {
+            sheetList = sheetListRequest.responseText.split(",");
+            //get 1st sheet
+            console.log("got sheet list");
+            console.log("sheet list: " + sheetList.toString())
+            console.log("loadSheet(sheetList[0])");
+            loadSheet(sheetList[0]);
         }
     };
-    getSheetRequest.send();
+    sheetListRequest.send();
+}
+
+//gets json for character sheet from server. If server returns error, calls loadSheetList to refresh sheetList/current
+function loadSheet(sheetName) {
+    console.log("sheet name: " + sheetName)
+
+    if (document.getElementsByClassName("char-link-active")[0].textContent !== sheetName) {
+        console.log("loading " + sheetName + "...")
+        let getSheetRequest = new XMLHttpRequest();
+        getSheetRequest.open("GET", window.location.href + sheetName, true);
+        getSheetRequest.setRequestHeader("Content-Type", "application/json");
+        getSheetRequest.onloadend = function () {
+            if (getSheetRequest.status === 200) {
+                //console.log(getSheetRequest.responseText);
+                let loadJson = JSON.parse(getSheetRequest.responseText);
+                renderSheet(loadJson)
+            } else if (getSheetRequest.status === 404) {
+                console.log("Character sheet not found for " + sheetName)
+
+                loadSheetList();
+            }
+        };
+        getSheetRequest.send();
+    }
 }
 
 function renderSheet(loadJson) {
@@ -37,12 +55,12 @@ function renderSheet(loadJson) {
         document.title = loadJson.page1.basic_info.char_name;
     }*/
 
-    //Load Basic Info
-    $('#character-basic-info #basic-info input[name="char-name"]').val(loadJson.page1.basic_info.char_name);
-    $('#character-basic-info #basic-info input[name="level"]').val(loadJson.page1.basic_info.level);
-    $('#character-basic-info #basic-info input[name="background"]').val(loadJson.page1.basic_info.background);
+    //document.getElementById("char-sheet-name").innerText = loadJson.page1.character_info.char_name;
 
     //Load Character Info
+    $('#character-basic-info #character-info input[name="char-name"]').val(loadJson.page1.character_info.char_name);
+    $('#character-basic-info #character-info input[name="level"]').val(loadJson.page1.character_info.level);
+    $('#character-basic-info #character-info input[name="background"]').val(loadJson.page1.character_info.background);
     $('#character-basic-info #character-info input[name="race-class"]').val(loadJson.page1.character_info.race_class);
     $('#character-basic-info #character-info input[name="player-name"]').val(loadJson.page1.character_info.player_name);
     $('#character-basic-info #character-info input[name="exp"]').val(loadJson.page1.character_info.exp);
@@ -388,21 +406,11 @@ function renderSheet(loadJson) {
         $('#page-3 #spells #level-9 .spells .spell:nth-child(' + child + ') input[name="spell-name"]').val(value.spell_name);
     });
 
+    currentSheet = loadJson.page1.character_info.char_name
     console.log("sheet loaded")
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
     //load list of char sheets
-    let sheetListRequest = new XMLHttpRequest();
-
-    sheetListRequest.open("GET", window.location.href + "all_sheets", true);
-    sheetListRequest.setRequestHeader("Content-Type", "text/plain");
-    sheetListRequest.onreadystatechange = function () {
-        if (sheetListRequest.readyState === 4 && sheetListRequest.status === 200) {
-            sheetList = sheetListRequest.responseText.split(",");
-            //get 1st sheet
-            loadSheet(sheetList[0]);
-        }
-    };
-    sheetListRequest.send();
+    loadSheetList();
 });

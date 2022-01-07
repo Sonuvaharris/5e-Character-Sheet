@@ -1,10 +1,22 @@
 /* Elements */
 
+body {
+    color: #000;
+    background-color: #ecf0f1;
+}
+
 input,
 textarea,
 select {
     border: none;
     outline: none;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px #c5c5c5 solid;
+    margin: 20px 5px 15px 5px;
 }
 
 textarea {
@@ -55,6 +67,26 @@ input[disabled="disabled"] {
     width: 55px;
 }
 
+#sidebar {
+    width: 200px;
+    background-color: #fff;
+    position: fixed!important;
+    z-index: 1;
+    overflow: auto;
+}
+
+#sidebar button {
+    width:100%;
+    border-bottom: 1px #7f8c8d solid;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+#sidebar a {
+    display:block;
+    text-align: right;
+}
+
 #scroll-to-top {
     bottom: 16px;
 }
@@ -85,10 +117,31 @@ input[disabled="disabled"] {
     margin-bottom: 16px;
 }
 
+.page {
+    display: none;
+}
+
 .page,
 .page-width {
     max-width: 80%;
     margin: auto;
+}
+
+.page-active {
+    display: block;
+}
+.page-link-active {
+    color: #000!important;
+    background-color: #9e9e9e!important;
+}
+
+.char-link {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(158 158 158) !important;
+}
+.char-link-active {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(96, 125, 139) !important;
 }
 
 #top-bar .label {
@@ -97,7 +150,7 @@ input[disabled="disabled"] {
 
 #top-bar .input-frame {
     background-size: contain;
-    padding: 15px;
+    padding: 5px 15px 15px;
     position: relative;
 }
 

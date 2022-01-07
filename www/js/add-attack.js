@@ -1,23 +1,23 @@
 function att_attack() {
-	var name = $('#attack-form input[name="name"]').val();
-	var stat = $('#attack-form select[name="stat"]').val();
-	var base = parseInt($('#attributes input[name="'+ stat +'-mod"]').val()) || 0;
-	var dice = $('#attack-form input[name="dice"]').val();
-	var bonus = parseInt($('#attack-form input[name="bonus"]').val()) || 0;
-	var damage_type = $('#attack-form input[name="dmg-type"]').val();
+	let name = $('#attack-form input[name="name"]').val();
+	let stat = $('#attack-form select[name="stat"]').val();
+	let base = parseInt($('#attributes input[name="'+ stat +'-mod"]').val()) || 0;
+	let dice = $('#attack-form input[name="dice"]').val();
+	let bonus = parseInt($('#attack-form input[name="bonus"]').val()) || 0;
+	let damage_type = $('#attack-form input[name="dmg-type"]').val();
 
 	if ($('#attack-form select[name="type"]').val() == 'toHit') {
 		if ( $('#attack-form input[name="proficiency"]').prop("checked") == true) {
-			var prof = parseInt($('#top-bar input[name="proficiency"]').val()) || 0;
+			let prof = parseInt($('#attributes input[name="proficiency"]').val()) || 0;
 		} else {
-			var prof = 0;
+			let prof = 0;
 		}
-		var to_hit = ((base + prof +bonus)<0?"":"+") + (base + prof + bonus);
+		let to_hit = ((base + prof +bonus)<0?"":"+") + (base + prof + bonus);
 	} else {
-		var dc = $('#attack-form input[name="dc"]').val();
+		let dc = $('#attack-form input[name="dc"]').val();
 	}
-	var damage_bonus = base + bonus;
-	var damage = dice + ((damage_bonus)<0?"":"+") + damage_bonus;
+	let damage_bonus = base + bonus;
+	let damage = dice + ((damage_bonus)<0?"":"+") + damage_bonus;
 
 	$('#attacks tbody').append(
 		`
@@ -47,7 +47,7 @@ $('document').ready(function (argument) {
 	});
 
 	$('#attack-form input[name="spell-dc"]').change(function (argument) {
-		var dc = parseInt($('#top-bar input[name="spell-dc"]').val()) || 0;
+		let dc = parseInt($('#attributes input[name="spell-dc"]').val()) || 0;
 		$('#attack-form input[name="dc"]').val(dc);
 	});
 
