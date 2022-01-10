@@ -20,21 +20,21 @@ def getSettings():
         if len(all_sheets) == 0:
             shutil.copy("www/js/defaultSheet.json", "sheets/New-Character.json")
 
-        settings_file.write("".join(all_sheets))
+        settings_file.write(",".join(all_sheets))
     elif len(sheets) != len(all_sheets):
         new_sheets = list(str)
         for sheet in all_sheets:
             if sheet not in sheets:
                 new_sheets.append(sheet)
         sheets.extend(new_sheets)
-        settings_file.write("".join(sheets))
+        settings_file.write(",".join(sheets))
     settings_file.close()
     return sheets
 
 
 def saveSettings(settings):
     settings_file = open("python/settings.txt", "w+")
-    settings_file.write("".join(settings))
+    settings_file.write(",".join(settings))
     settings_file.close()
 
 
@@ -42,14 +42,14 @@ def saveSettings(settings):
 class Server(BaseHTTPRequestHandler):
     def do_GET(self):
         print("path: " + self.path)
-        # print("Headers: " + "".join(self.headers))
+        # print("Headers: " + ",".join(self.headers))
 
         # TEXT/PLAIN HANDLER
         if self.headers.get("Content-Type") == "text/plain":
             if self.path == "/all_sheets":
                 self.send_response(200)
                 self.end_headers()
-                self.wfile.write(bytes("".join(getSettings()), encoding='utf8'))
+                self.wfile.write(bytes(",".join(getSettings()), encoding='utf8'))
             else:
                 self.send_error(400)
                 self.end_headers()
@@ -102,10 +102,10 @@ class Server(BaseHTTPRequestHandler):
         elif self.headers.get("Content-Type") == "application/json":
             try:
                 sheet_name = self.headers.get("sheet_name")
-                with open("/sheets/" + sheet_name + ".json", "w+") as f:
+                with open("sheets/" + sheet_name + ".json", "w") as f:
                     f.write(post_body.decode())
-                if self.headers.get("replace-file") != "":
-                    os.remove("sheet/")
+                # if self.headers.get("replace-file") != "":
+                #    os.remove("sheet/")
                 self.send_response(200)
                 self.end_headers()
             except FileNotFoundError as e:

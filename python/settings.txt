@@ -1,1 +1,1 @@
-New-Character.json
+Lady-Elwynn-Silversong.json,New-Character.json

@@ -64,7 +64,7 @@ function getSpells(spellLevel) {
     return spells
 }
 
-function saveSheet(argument) {
+function saveSheet() {
     let sheet = {
         page1: {
             character_info: {
@@ -385,7 +385,7 @@ function saveSheet(argument) {
         }
     }
 
-    let charName = String(sheet.page1.basic_info.char_name).replaceAll(" ", "-");
+    let charName = String(sheet.page1.character_info.char_name).replaceAll(" ", "-");
     if (charName === "") {
         alert("Character must have a name before saving!")
     }
@@ -393,7 +393,7 @@ function saveSheet(argument) {
     let request = new XMLHttpRequest();
     request.open("POST", window.location.href, true);
     request.setRequestHeader("Content-Type", "application/json");
-    request.setRequestHeader("sheet_name", charName);
+    request.setRequestHeader("sheet_name", "New-Character");
     request.onreadystatechange = function () {
         //if (request.readyState === 4 && request.status === 200) {
             //let json = JSON.parse(request.responseText);

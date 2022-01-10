@@ -26,17 +26,16 @@
 	page-5: Notes
     -->
     <div class="w3-border-right" id="sidebar">
-        <button onclick="loadSheet(this.innerText)" class="w3-bar-item w3-large w3-button char-link char-link-active"><img src="img/lock.png"/>Lady Elwynn Silversong</button>
+        <button  id="char-sheet-name" onclick="loadSheet(this.innerText)" class="w3-bar-item w3-large w3-button char-link char-link-active">Character Sheet</button>
         <div id="sheetOptions">
             <a id="page-1-link" class="w3-button page-link-active" onclick="openPage('page-1');">Attributes</a>
             <a id="page-2-link" class="w3-button w3-hover-gray" onclick="openPage('page-2');">Inv. & NPCs</a>
             <a id="page-3-link" class="w3-button w3-hover-gray" onclick="openPage('page-3');">Spell Sheet</a>
             <a id="page-4-link" class="w3-button w3-hover-gray" onclick="openPage('page-4');">Backstory</a>
             <a id="page-5-link" class="w3-button w3-hover-gray" onclick="openPage('page-5');">Notes</a>
-            <a class="w3-button w3-hover-gray">Unlock Sheet</a>
+            <!--<a class="w3-button w3-hover-gray">Unlock Sheet</a>-->
+            <a id="save" class="w3-button w3-hover-gray" onclick="saveSheet()">Save</a>
         </div>
-        <button id="char-sheet-name" onclick="loadSheet(this.innerText)" class="w3-bar-item w3-large w3-button char-link">Character Sheet</button>
-        <button onclick="loadSheet(this.innerText)" class="w3-bar-item w3-large w3-button char-link"><img src="img/lock.png" alt="locked"/>Randy</button>
     </div>
     <!-- Sidebar Button -->
     <!--<div>
